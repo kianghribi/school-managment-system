@@ -1,0 +1,145 @@
+{
+    "courses": [
+        {
+            "id": 1001,
+            "name": "java",
+            "units": 4
+        },
+        {
+            "id": 1002,
+            "name": "c#",
+            "units": 3
+        },
+        {
+            "id": 1003,
+            "name": "python",
+            "units": 2
+        }
+    ],
+    "students": [
+        {
+            "id": 2001,
+            "name": "ali",
+            "family": "rezaei",
+            "courses": [
+                [
+                    1001,
+                    12
+                ],
+                [
+                    1003,
+                    5
+                ]
+            ]
+        },
+        {
+            "id": 2002,
+            "name": "reza",
+            "family": "alinia",
+            "courses": [
+                [
+                    1002,
+                    8
+                ],
+                [
+                    1003,
+                    15
+                ]
+            ]
+        },
+        {
+            "id": 2003,
+            "name": "ahmad",
+            "family": "hassani",
+            "courses": [
+                [
+                    1002,
+                    0
+                ]
+            ]
+        },
+        {
+            "id": 2004,
+            "name": "sina",
+            "family": "kiani",
+            "courses": [
+                [
+                    1002,
+                    8
+                ],
+                [
+                    1003,
+                    7
+                ]
+            ]
+        },
+        {
+            "id": 2005,
+            "name": "kian",
+            "family": "gh",
+            "courses": [
+                [
+                    1003,
+                    9
+                ],
+                [
+                    1001,
+                    6
+                ]
+            ]
+        }
+    ],
+    "teachers": [
+        {
+            "id": 3001,
+            "name": "alireza",
+            "family": "rezapour",
+            "grade": "bsc",
+            "courses": [
+                1001,
+                1003
+            ]
+        },
+        {
+            "id": 3002,
+            "name": "amir",
+            "family": "hassanpour",
+            "grade": "msc",
+            "courses": [
+                1002
+            ]
+        },
+        {
+            "id": 3003,
+            "name": "ahmad",
+            "family": "ahmadi",
+            "grade": "phd",
+            "courses": [
+                1002,
+                1003
+            ]
+        }
+    ],
+    "classrooms": [
+        {
+            "id": 4001,
+            "name": "c# start",
+            "course": 1002,
+            "teacher": 3003,
+            "students": [
+                2002,
+                2003
+            ]
+        },
+        {
+            "id": 4002,
+            "name": "python pro",
+            "course": 1003,
+            "teacher": 3002,
+            "students": [
+                2005,
+                2004
+            ]
+        }
+    ]
+}
