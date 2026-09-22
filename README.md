@@ -104,3 +104,102 @@ $ python main.py
 ```
 (no output — data is written silently to saves.json)
 ```
+
+## Structure
+
+### Course
+
+**Properties:**
+- `id`: unique identifier of the course
+- `name`: name of the course
+- `units`: number of units (credits)
+- `score`: score of the student in this course (used when a course is attached to a student)
+
+**Methods:**
+- `__init__(self, id, name, units)`: creates a new course with the given id, name, and units
+- `__eq__(self, other)`: compares two courses by their id
+- `__str__(self)`: returns a readable string representation of the course
+
+---
+
+### Student
+
+**Properties:**
+- `id`: unique identifier of the student
+- `name`: first name
+- `family`: last name
+- `courses`: list of `Course` objects the student is enrolled in (each with its own score)
+
+**Methods:**
+- `__init__(self, id, name, family)`: creates a new student
+- `__eq__(self, other)`: compares two students by their id
+- `__str__(self)`: returns a readable string representation of the student
+- `print_info(self)`: prints full details of the student and their courses
+
+---
+
+### Teacher
+
+**Properties:**
+- `id`: unique identifier of the teacher
+- `name`: first name
+- `family`: last name
+- `grade`: academic rank or degree of the teacher
+- `courses`: list of `Course` objects the teacher teaches
+
+**Methods:**
+- `__init__(self, id, name, family, grade)`: creates a new teacher
+- `__eq__(self, other)`: compares two teachers by their id
+- `__str__(self)`: returns a readable string representation of the teacher
+- `print_info(self)`: prints full details of the teacher and their courses
+
+---
+
+### Classroom
+
+**Properties:**
+- `id`: unique identifier of the classroom
+- `name`: name of the classroom
+- `course`: the `Course` object taught in this classroom
+- `teacher`: the `Teacher` object who teaches this classroom
+- `students`: list of `Student` objects enrolled in this classroom
+
+**Methods:**
+- `__init__(self, id, name)`: creates a new classroom
+- `__eq__(self, other)`: compares two classrooms by their id
+- `__str__(self)`: returns a readable string representation of the classroom
+- `print_info(self)`: prints full details of the classroom, including course, teacher, and students
+
+---
+
+### School
+
+**Properties:**
+- `name`: name of the school
+- `selected_student`: currently selected student (used in the interactive menu)
+- `selected_teacher`: currently selected teacher
+- `selected_classroom`: currently selected classroom
+- `courses`: list of all `Course` objects in the school
+- `teachers`: list of all `Teacher` objects
+- `students`: list of all `Student` objects
+- `classrooms`: list of all `Classroom` objects
+
+**Methods:**
+- `__init__(self, name)`: creates a new school
+- `add_student(self, student)`: adds a student if not already present
+- `add_course(self, course)`: adds a course if not already present
+- `add_teacher(self, teacher)`: adds a teacher if not already present
+- `load_data(self)`: loads all data from `dataa.json` and reconstructs the objects
+- `save_data(self)`: saves the current state to `saves.json`
+- `remove_student(self, id)`: removes a student by id if not used in any classroom
+- `remove_course(self, id)`: removes a course by id if not used by any student, teacher, or classroom
+- `remove_teacher(self, id)`: removes a teacher by id if not assigned to any classroom
+- `remove_classroom(self, id)`: removes a classroom by id
+- `edit_student(self, student)`: updates an existing student's name and family
+- `edit_teacher(self, teacher)`: updates an existing teacher's name, family, and grade
+- `edit_course(self, course)`: updates an existing course's name and units
+- `edit_classroom(self, classroom)`: updates an existing classroom's name
+- `print_students(self)`: prints all students
+- `print_courses(self)`: prints all courses
+- `print_teachers(self)`: prints all teachers
+- `print_classroom(self)`: prints all classrooms
