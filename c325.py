@@ -38,6 +38,29 @@ class Student:
             print("\tID\tName\tUnits\tScore")
             for course in self.courses:
                 print(f"\t{course.id}\t{course.name}\t{course.units}\t{course.score}")
+    def add_course(self, course: Course):
+        if course in self.courses:
+            print("This course is already added")
+            return
+        new_course = Course(course.id, course.name, course.units)
+        self.courses.append(new_course)
+        print(f"Course '{new_course.name}' added successfully.")
+
+    def remove_course(self, course_id: int):
+        course = Course(course_id, "", 0)
+        if course in self.courses:
+            self.courses.remove(course)
+            print("Course removed successfully")
+        else:
+            print("The course doesn't exist")
+    def set_score(self, course_id: int, score: float):
+        course = Course(course_id, "", 0)
+        if course not in self.courses:
+            print("Course not found")
+            return
+        index = self.courses.index(course)
+        self.courses[index].score = score
+        print(f"Score of '{self.courses[index].name}' set to {score}")
 class Teacher:
     id:int=0
     name:str=""
@@ -65,6 +88,20 @@ class Teacher:
         print("\tID\tName\tUnits\tScore")
         for course in self.courses:
             print(f"\t{course.id}\t{course.name}\t{course.units}\t{course.score}")
+    def add_course(self, course: Course):
+        if course in self.courses:
+            print("This course is already added")
+            return
+        new_course = Course(course.id, course.name, course.units)
+        self.courses.append(new_course)
+        print(f"Course '{new_course.name}' added successfully.")
+    def remove_course(self, course_id: int):
+        course = Course(course_id, "", 0)
+        if course in self.courses:
+            self.courses.remove(course)
+            print("Course removed successfully")
+        else:
+            print("The course doesn't exist")
             
 class Classroom:
     id:int=0
@@ -88,6 +125,44 @@ class Classroom:
         print("classrooms:")
         print("\tID\tClass\t\tCourse\t\tTeacher\t\tstudents")
         print(f"\t{self.id}\t{self.name}\t{ self.course.name }\t\t{self.teacher.name}\t\t{', '.join([s.name for s in self.students])}")
+
+    def change_course(self, new_course: Course):
+        self.course = new_course
+        if self.teacher is not None and new_course not in self.teacher.courses:
+            self.teacher = None
+            print("The current teacher does not teach this course. Teacher removed.")
+        else:
+            print(f"Classroom course changed to {new_course.name}")
+        kept = []
+        for s in self.students:
+            if new_course in s.courses:
+                kept.append(s)
+            else:
+                print(f"Student ID {s.id} removed (does not have this course).")
+        self.students = kept
+    def change_teacher(self, new_teacher: Teacher):
+        if new_teacher is None or self.course not in new_teacher.courses:
+            print("This teacher does not teach this course.")
+            return
+        self.teacher = new_teacher
+        print(f"Teacher changed to {new_teacher.name} {new_teacher.family}")
+    def add_student(self, student: Student):
+        if student in self.students:
+            print("Student already in this classroom")
+            return
+        if not any(c.id == self.course.id and c.score < 10 for c in student.courses):
+            print("Student does not qualify (no failing score in this course)")
+            return
+        self.students.append(student)
+        print(f"Student {student.name} {student.family} added successfully")
+
+    def remove_student(self, student_id: int):
+        student = Student(student_id, "", "")
+        if student in self.students:
+            self.students.remove(student)
+            print("Student removed successfully")
+        else:
+            print("Student not found in this classroom")
 class School:
     name:str=""
     selected_student:Student=None
@@ -366,32 +441,23 @@ while True:
            sc1.selected_student.print_info()
         elif cmd==2:
             sc1.print_courses()
-            course_id=int(input("Enter id too select:"))
-            course_object=Course(course_id,"",0)
-            if course_object in sc1.courses:
-                index_c = sc1.courses.index(course_object)
-                original_course = sc1.courses[index_c]
-                new_course = Course(original_course.id, original_course.name, original_course.units)
-                sc1.selected_student.courses.append(new_course)
-                print(f"Course '{new_course.name}' added successfully.")
+            course_id = int(input("Enter id to select: "))
+            course_obj = Course(course_id, "", 0)
+            if course_obj in sc1.courses:
+                original = sc1.courses[sc1.courses.index(course_obj)]
+                sc1.selected_student.add_course(original)
             else:
                 print("Course not found")
         elif cmd==3:
             print("\tID\tName\tUnits\tScore")
             for course in sc1.selected_student.courses:
-                print(f"  id:{course.id}, name:{course.name}, units:{course.units}, score:{course.score}")
-            selected_course_id = int(input("Enter id too select:"))
-            id_course = Course(selected_course_id,"",0)
-            if id_course in sc1.selected_student.courses:
-                sc1.selected_student.courses.remove(id_course)
-                print("course removed successfully")
-            else:
-                print("the course doesn't exist")
+                print(f"  id:{course.id}, name:{course.name}, units:{course.units}")
+            course_id = int(input("Enter id to remove: "))
+            sc1.selected_student.remove_course(course_id)
         elif cmd==4:
             for course in sc1.selected_student.courses:
-                new_score = int(input(f"  {course.name}: "))
-                course.score = new_score
-            print("scores added succsesfully")
+                new_score = float(input(f"  {course.name}: "))
+                sc1.selected_student.set_score(course.id, new_score)
             
         elif cmd==0:
             sc1.selected_student = None
@@ -446,29 +512,20 @@ while True:
             sc1.selected_teacher.print_info()
         elif cmd==2:
             sc1.print_courses()
-            course_id=int(input("Enter id too select:"))
-            course_object=Course(course_id,"",0)
-            if course_object in sc1.courses:
-                index_c = sc1.courses.index(course_object)
-                original_course = sc1.courses[index_c]
-                new_course = Course(original_course.id, original_course.name, original_course.units)
-                sc1.selected_teacher.courses.append(new_course)
-                print(f"Course '{new_course.name}' added successfully.")
+            course_id = int(input("Enter id to select: "))
+            course_obj = Course(course_id, "", 0)
+            if course_obj in sc1.courses:
+                original = sc1.courses[sc1.courses.index(course_obj)]
+                sc1.selected_teacher.add_course(original)
             else:
-                print("Course not found") 
+                print("Course not found")
         elif cmd==3:
             print("\tID\tName\tUnits\tScore")
             for course in sc1.selected_teacher.courses:
-                print(f"  id:{course.id}, name:{course.name}, units:{course.units}, score:{course.score}")
-            selected_t_course_id = int(input("Enter id too select:"))
-            id_course = Course(selected_t_course_id,"",0)
-            if id_course in sc1.selected_teacher.courses:
-                sc1.selected_teacher.courses.remove(id_course)
-                print("course removed successfully")
-            else:
-                print("the course doesn't exist")
-        elif cmd==4:
-            pass
+                print(f"  id:{course.id}, name:{course.name}, units:{course.units}")
+            course_id = int(input("Enter id to remove: "))
+            sc1.selected_teacher.remove_course(course_id)
+    
         elif cmd==0:
             sc1.selected_teacher = None
             level="teachers"
@@ -580,6 +637,9 @@ while True:
         print("5.remove student")
         print("0.back")
         cmd=int(input())
+        
+        cls = sc1.selected_classroom
+
         if cmd==1:
            sc1.selected_classroom.print_info()
         elif cmd==2:
@@ -618,51 +678,38 @@ while True:
                     print(f"ID: {t.id} | Name: {t.name} {t.family}")
             else:
                 print("No teachers found for this course.")
-            new_teacher_id = int(input("Enter new teacher ID: "))
-            new_teacher = None
-            teacher_temp=Teacher(new_teacher_id, "", "","")
-            original_teachers=sc1.teachers[sc1.teachers.index(teacher_temp)]
-            new_teacher = Teacher(original_teachers.id, original_teachers.name, original_teachers.family, original_teachers.grade)
-            
-            if new_teacher:
-                sc1.selected_classroom.teacher = new_teacher
-                print(f"Classroom teacher changed to {new_teacher.name} {new_teacher.family}.")
+
+            for t in sc1.teachers:
+                if cls.course in t.courses:
+                    print(f"ID: {t.id} | Name: {t.name} {t.family}")
+            teacher_id = int(input("Enter new teacher id: "))
+            teacher_obj = Teacher(teacher_id, "", "", "")
+            if teacher_obj in sc1.teachers:
+                original = sc1.teachers[sc1.teachers.index(teacher_obj)]
+                cls.change_teacher(original)
             else:
-                print("The entered teacher is not in the qualified list or does not exist.")
+                print("Teacher not found")
 
         elif cmd==4:
-            cls = sc1.selected_classroom
-            selected_course = cls.course
-            valid_students=[]
             for s in sc1.students:
-                if s not in cls.students:
-                    for c in s.courses:
-                        if c.id== selected_course.id and c.score < 10:
-                            valid_students.append(s)
-            for student in valid_students:
-                print(student)
-            new_add_student=(int(input("Enter ID too add:")))
-            student_temp=Student(new_add_student, "", "")
-            original_students=sc1.students[sc1.students.index(student_temp)]
-            new_student = Student(original_students.id, original_students.name, original_students.family)
-            if new_student:
-                cls.students.append(new_student)
-                print(f"new student {new_student.name} {new_student.family} added succssefully")
+                if s not in cls.students and any(
+                    c.id == cls.course.id and c.score < 10 for c in s.courses
+                ):
+                    print(s)
+            student_id = int(input("Enter student id to add: "))
+            student_obj = Student(student_id, "", "")
+            if student_obj in sc1.students:
+                original = sc1.students[sc1.students.index(student_obj)]
+                cls.add_student(original)
             else:
-                print("New student not found")
+                print("Student not found")
 
         elif cmd==5:
             cls=sc1.selected_classroom
             for s in cls.students:
                 print(s)
-            student_remove_id=int(input("Enter ID too remove:"))
-            student_temp=Student(student_remove_id, "", "")
-            if student_temp in cls.students:
-                cls.students.remove(student_temp)
-                print(f"student {student_temp.name} {student_temp.family} remove successfully.")
-            else:
-                print("student not found")
-
+            student_id = int(input("Enter student id to remove: "))
+            cls.remove_student(student_id)
             
         elif cmd==0:
             level=" select classroom"

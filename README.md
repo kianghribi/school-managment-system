@@ -135,6 +135,9 @@ $ python main.py
 - `__eq__(self, other)`: compares two students by their id
 - `__str__(self)`: returns a readable string representation of the student
 - `print_info(self)`: prints full details of the student and their courses
+- `add_course(self, course)`: adds a course to the student's list (with a fresh score of 0.0)
+- `remove_course(self, course_id)`: removes a course from the student's list by its id
+- `set_score(self, course_id, score)`: sets the score of a specific course for this student
 
 ---
 
@@ -152,6 +155,8 @@ $ python main.py
 - `__eq__(self, other)`: compares two teachers by their id
 - `__str__(self)`: returns a readable string representation of the teacher
 - `print_info(self)`: prints full details of the teacher and their courses
+- `add_course(self, course)`: adds a course to the teacher's list
+- `remove_course(self, course_id)`: removes a course from the teacher's list by its id
 
 ---
 
@@ -169,6 +174,10 @@ $ python main.py
 - `__eq__(self, other)`: compares two classrooms by their id
 - `__str__(self)`: returns a readable string representation of the classroom
 - `print_info(self)`: prints full details of the classroom, including course, teacher, and students
+- `change_course(self, new_course)`: changes the classroom's course; removes the teacher if they don't teach it, and removes students who don't have this course
+- `change_teacher(self, new_teacher)`: changes the classroom's teacher (only if they actually teach the course)
+- `add_student(self, student)`: adds a student to the classroom (only if they have a failing score below 10 in this course)
+- `remove_student(self, student_id)`: removes a student from the classroom by their id
 
 ---
 
@@ -189,6 +198,7 @@ $ python main.py
 - `add_student(self, student)`: adds a student if not already present
 - `add_course(self, course)`: adds a course if not already present
 - `add_teacher(self, teacher)`: adds a teacher if not already present
+- `add_classroom(self, id, name, course_id, teacher_id, student_ids)`: creates a new classroom with the given course, teacher, and students (with full validation)
 - `load_data(self)`: loads all data from `dataa.json` and reconstructs the objects
 - `save_data(self)`: saves the current state to `saves.json`
 - `remove_student(self, id)`: removes a student by id if not used in any classroom
