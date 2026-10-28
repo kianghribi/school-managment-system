@@ -1,4 +1,6 @@
 import json
+import emoji
+from colorama import Fore , Back , Style
 class Course:
     id:int=0
     name:str=""
@@ -40,27 +42,27 @@ class Student:
                 print(f"\t{course.id}\t{course.name}\t{course.units}\t{course.score}")
     def add_course(self, course: Course):
         if course in self.courses:
-            print("This course is already added")
+            print(Fore.RED + emoji.emojize("This course is already added.:thumbs_down:") + Style.RESET_ALL)
             return
         new_course = Course(course.id, course.name, course.units)
         self.courses.append(new_course)
-        print(f"Course '{new_course.name}' added successfully.")
+        print(Fore.GREEN + emoji.emojize (f"Course '{new_course.name}' added successfully.:check_mark:") + Style.RESET_ALL)
 
     def remove_course(self, course_id: int):
         course = Course(course_id, "", 0)
         if course in self.courses:
             self.courses.remove(course)
-            print("Course removed successfully")
+            print(Fore.GREEN + emoji.emojize("Course removed successfully.:cross_mark:") + Style.RESET_ALL)
         else:
-            print("The course doesn't exist")
+            print(Fore.RED + emoji.emojize("The course doesn't exist.:check_mark:") + Style.RESET_ALL)
     def set_score(self, course_id: int, score: float):
         course = Course(course_id, "", 0)
         if course not in self.courses:
-            print("Course not found")
+            print(Fore.RED + emoji.emojize("Course not found :cross_mark:") + Style.RESET_ALL)
             return
         index = self.courses.index(course)
         self.courses[index].score = score
-        print(f"Score of '{self.courses[index].name}' set to {score}")
+        print(Fore.GREEN + emoji.emojize(f"Score of '{self.courses[index].name}' set to {score}.:thumbs_up:") + Style.RESET_ALL)
 class Teacher:
     id:int=0
     name:str=""
@@ -90,18 +92,18 @@ class Teacher:
             print(f"\t{course.id}\t{course.name}\t{course.units}\t{course.score}")
     def add_course(self, course: Course):
         if course in self.courses:
-            print("This course is already added")
+            print(Fore.RED + emoji.emojize("This course is already added.:check_mark:")+ Style.RESET_ALL)
             return
         new_course = Course(course.id, course.name, course.units)
         self.courses.append(new_course)
-        print(f"Course '{new_course.name}' added successfully.")
+        print(Fore.GREEN + emoji.emojize(f"Course '{new_course.name}' added successfully.:check_mark:")+ Style.RESET_ALL)
     def remove_course(self, course_id: int):
         course = Course(course_id, "", 0)
         if course in self.courses:
             self.courses.remove(course)
-            print("Course removed successfully")
+            print(Fore.GREEN + emoji.emojize("Course removed successfully.:cross_mark:")+ Style.RESET_ALL)
         else:
-            print("The course doesn't exist")
+            print(Fore.RED + emoji.emojize("The course doesn't exist")+ Style.RESET_ALL)
             
 class Classroom:
     id:int=0
@@ -130,39 +132,39 @@ class Classroom:
         self.course = new_course
         if self.teacher is not None and new_course not in self.teacher.courses:
             self.teacher = None
-            print("The current teacher does not teach this course. Teacher removed.")
+            print(Fore.RED + emoji.emojize("The current teacher does not teach this course. Teacher removed.:cross_mark:")+ Style.RESET_ALL)
         else:
-            print(f"Classroom course changed to {new_course.name}")
+            print(Fore.GREEN + emoji.emojize(f"Classroom course changed to {new_course.name}.:check_mark:")+ Style.RESET_ALL)
         kept = []
         for s in self.students:
             if new_course in s.courses:
                 kept.append(s)
             else:
-                print(f"Student ID {s.id} removed (does not have this course).")
+                print(Fore.RED + emoji.emojize(f"Student ID {s.id} removed (does not have this course).:cross_mark:")+ Style.RESET_ALL)
         self.students = kept
     def change_teacher(self, new_teacher: Teacher):
         if new_teacher is None or self.course not in new_teacher.courses:
-            print("This teacher does not teach this course.")
+            print(Fore.RED + emoji.emojize("This teacher does not teach this course.:cross_mark:")+ Style.RESET_ALL)
             return
         self.teacher = new_teacher
-        print(f"Teacher changed to {new_teacher.name} {new_teacher.family}")
+        print(Fore.GREEN + emoji.emojize(f"Teacher changed to {new_teacher.name} {new_teacher.family}.:check_mark:")+ Style.RESET_ALL)
     def add_student(self, student: Student):
         if student in self.students:
-            print("Student already in this classroom")
+            print(Fore.RED + emoji.emojize("Student already in this classroom.:cross_mark:")+ Style.RESET_ALL)
             return
         if not any(c.id == self.course.id and c.score < 10 for c in student.courses):
-            print("Student does not qualify (no failing score in this course)")
+            print(Fore.RED + emoji.emojize("Student does not qualify (no failing score in this course).:cross_mark:")+ Style.RESET_ALL)
             return
         self.students.append(student)
-        print(f"Student {student.name} {student.family} added successfully")
+        print(Fore.GREEN + emoji.emojize(f"Student {student.name} {student.family} added successfully.:check_mark:")+ Style.RESET_ALL)
 
     def remove_student(self, student_id: int):
         student = Student(student_id, "", "")
         if student in self.students:
             self.students.remove(student)
-            print("Student removed successfully")
+            print(Fore.GREEN + emoji.emojize("Student removed successfully.:check_mark:")+ Style.RESET_ALL)
         else:
-            print("Student not found in this classroom")
+            print(Fore.RED + emoji.emojize("Student not found in this classroom.:cross_mark:")+ Style.RESET_ALL)
 class School:
     name:str=""
     selected_student:Student=None
@@ -176,23 +178,23 @@ class School:
         self.name=name
     def add_student(self,student:Student):
         if student in self.students:
-            print("The student already exist")
+            print(Fore.RED + emoji.emojize("The student already exist.:cross_mark:")+ Style.RESET_ALL)
         else:
             self.students.append(student)
-            print("student added sucssefully")
+            print(Fore.GREEN + emoji.emojize("student added sucssefully.:check_mark:")+ Style.RESET_ALL)
     def add_course (self,course:Course):
         if course in self.courses:
-            print("The course already exist")
+            print(Fore.RED + emoji.emojize("The course already exist.:cross_mark:")+ Style.RESET_ALL)
             
         else:
             self.courses.append(course)
-            print("course add succsesfully")
+            print(Fore.GREEN + emoji.emojize("course add succsesfully.:check_mark:")+ Style.RESET_ALL)
     def add_teacher (self,teacher:Teacher):
         if teacher in self.teachers:
-            print("The teacher already exist")
+            print(Fore.RED + emoji.emojize("The teacher already exist.:cross_mark:")+ Style.RESET_ALL)
         else:
             self.teachers.append(teacher)
-            print("teacher added sucssefully")
+            print(Fore.GREEN + emoji.emojize("teacher added sucssefully.:check_mark:")+ Style.RESET_ALL)
     def load_data(self):
         with open("dataa.json","rt")as f1:
             data=json.load(f1)   
@@ -284,69 +286,69 @@ class School:
     def remove_student(self,id):
         student_id = Student(id, "", "")
         if student_id not in self.students:
-            print("The student doesn't exist")
+            print(Fore.RED + emoji.emojize("The student doesn't exist.:cross_mark:")+ Style.RESET_ALL)
         elif any(True for cls in self.classrooms for s in cls.students if s.id == id):
-            print("This student is used in a classroom and cannot be removed.")
+            print(Fore.RED + emoji.emojize("This student is used in a classroom and cannot be removed.:cross_mark:")+ Style.RESET_ALL)
         else:
             self.students.remove(student_id)
-            print("Student removed successfully")
+            print(Fore.GREEN + emoji.emojize("Student removed successfully.:check_mark:")+ Style.RESET_ALL)
     def remove_course(self,id):
         course_id = Course(id,"",0)
         if course_id not in self.courses:
-            print("the course doesn't exist")
+            print(Fore.RED + emoji.emojize("the course doesn't exist.:cross_mark:")+ Style.RESET_ALL)
         elif (any(c.id == id for student in self.students for c in student.courses) or
               any(c.id == id for teacher in self.teachers for c in teacher.courses) or
-              any(cls.course is not None and cls.course.id == id for cls in self.classrooms)):
-                print("This course is used in a student, teacher, or classroom and cannot be removed.")
+              any(cls.course is not None and cls.course.id == id for cls in self.classrooms)+ Style.RESET_ALL):
+                print(Fore.RED + emoji.emojize("This course is used in a student, teacher, or classroom and cannot be removed.:cross_mark:")+ Style.RESET_ALL)
         else:
             self.courses.remove(course_id)
-            print("Course removed successfully")
+            print(Fore.GREEN + emoji.emojize("Course removed successfully.:check_mark:")+ Style.RESET_ALL)
     def remove_teacher(self, id):
         teacher_id = Teacher(id, "", "", "")
         if teacher_id not in self.teachers:
-            print("The teacher doesn't exist")
+            print(Fore.RED + emoji.emojize("The teacher doesn't exist.:cross_mark:")+ Style.RESET_ALL)
         elif any(cls.teacher is not None and cls.teacher.id == id for cls in self.classrooms):
-            print("This teacher is used in a classroom and cannot be removed.")
+            print(Fore.RED + emoji.emojize("This teacher is used in a classroom and cannot be removed.")+ Style.RESET_ALL)
         else:
             self.teachers.remove(teacher_id)
-            print("Teacher removed successfully")
+            print(Fore.GREEN + emoji.emojize("Teacher removed successfully.:check_mark:")+ Style.RESET_ALL)
             
     def remove_classroom(self,id):
         id_classroom = Classroom(id,"")
         if id_classroom in self.classrooms:
             self.classrooms.remove(id_classroom)
-            print("classroom removed successfully")
+            print(Fore.GREEN + emoji.emojize("classroom removed successfully.:check_mark:")+ Style.RESET_ALL)
         else:
-            print("the classroom doesn't exist")
+            print(Fore.RED + emoji.emojize("the classroom doesn't exist.:cross_mark:")+ Style.RESET_ALL)
 
     def edit_student(self,student:Student):
         if student not in self.students:
-            print("The student dosen't exist")
+            print(Fore.RED + emoji.emojize("The student dosen't exist.:cross_mark:")+ Style.RESET_ALL)
         else:
              index = self.students.index(student)  
              self.students[index].name = student.name
              self.students[index].family = student.family
-             print("Student edited successfully")
+             print(Fore.GREEN +emoji.emojize( "Student edited successfully.:check_mark:")+ Style.RESET_ALL)
     def edit_teacher(self,teacher:Teacher):
         if teacher not in self.teachers:
-            print("The teacher doesn't exist")
+            print(Fore.RED + emoji.emojize("The teacher doesn't exist.:cross_mark:")+ Style.RESET_ALL)
         else:
              index = self.teachers.index(teacher)  
              self.teachers[index].name = teacher.name
              self.teachers[index].family = teacher.family
              self.teachers[index].grade = teacher.grade
-             print("Student edited successfully")
+             print(Fore.GREEN +emoji.emojize("Student edited successfully.:check_mark:")+ Style.RESET_ALL)
     def edit_course(self,course:Course):
         if course not in self.courses:
-            print("The student dosen't exist")
+            print(Fore.RED + emoji.emojize("The student dosen't exist.:cross_mark:")+ Style.RESET_ALL)
         else:
              index = self.courses.index(course)  
              self.courses[index].name = course.name
              self.courses[index].units = course.units
-             print("Student edited successfully") 
+             print(Fore.GREEN +emoji.emojize("Student edited successfully.:check_mark:")+ Style.RESET_ALL )
     def edit_classroom(self,classroom:Classroom):
         if classroom not in self.classrooms:
-            print("The classroom dosen't exist")
+            print(Fore.RED + emoji.emojize("The classroom dosen't exist.:cross_mark:")+ Style.RESET_ALL)
         else:
             index = self.classrooms.index(classroom)
             self.classrooms[index].name=classroom.name
@@ -423,9 +425,9 @@ while True:
             if student_object in sc1.students:
                 indexx = sc1.students.index(student_object)
                 sc1.selected_student = sc1.students[indexx]
-                print(f"Student {sc1.selected_student.name} {sc1.selected_student.family} selected.")
+                print(Fore.GREEN + emoji.emojize(f"Student {sc1.selected_student.name} {sc1.selected_student.family} selected.:check_mark:")+ Style.RESET_ALL)
             else:
-                print("Student not found")
+                print(Fore.RED + emoji.emojize("Student not found.:cross_mark:")+ Style.RESET_ALL)
                 level = "students"
             level="select students"
         elif cmd==0:
@@ -447,7 +449,7 @@ while True:
                 original = sc1.courses[sc1.courses.index(course_obj)]
                 sc1.selected_student.add_course(original)
             else:
-                print("Course not found")
+                print(Fore.RED + emoji.emojize("Course not found")+ Style.RESET_ALL)
         elif cmd==3:
             print("\tID\tName\tUnits\tScore")
             for course in sc1.selected_student.courses:
@@ -495,9 +497,9 @@ while True:
             if teacher_object in sc1.teachers:
                 index_t = sc1.teachers.index(teacher_object)
                 sc1.selected_teacher = sc1.teachers[index_t]
-                print(f"Teacher {sc1.selected_teacher.name} {sc1.selected_teacher.family} selected.")
+                print(Fore.GREEN + emoji.emojize(f"Teacher {sc1.selected_teacher.name} {sc1.selected_teacher.family} selected.:check_mark:")+ Style.RESET_ALL)
             else:
-                print("Teacher not found")
+                print(Fore.RED + emoji.emojize("Teacher not found.:check_mark:")+ Style.RESET_ALL)
                 level = "teachers"
             level="select teachers"
         elif cmd==0:
@@ -518,7 +520,7 @@ while True:
                 original = sc1.courses[sc1.courses.index(course_obj)]
                 sc1.selected_teacher.add_course(original)
             else:
-                print("Course not found")
+                print(Fore.RED + emoji.emojize("Course not found.:cross_mark:")+ Style.RESET_ALL)
         elif cmd==3:
             print("\tID\tName\tUnits\tScore")
             for course in sc1.selected_teacher.courses:
@@ -622,9 +624,9 @@ while True:
             if classroom_object in sc1.classrooms:
                 index_c = sc1.classrooms.index(classroom_object)
                 sc1.selected_classroom = sc1.classrooms[index_c]
-                print(f"Classroom {sc1.selected_classroom.name}  selected.")
+                print(Fore.GREEN + emoji.emojize(f"Classroom {sc1.selected_classroom.name}  selected.:check_mark:"))
             else:
-                print("Classroom not found")
+                print(Fore.RED + emoji.emojize("Classroom not found.:cross_mark:")+ Style.RESET_ALL)
                 level = "classrooms"
             level="select classroom"
         elif cmd==0:
@@ -645,7 +647,7 @@ while True:
         elif cmd==2:
             selected = sc1.selected_classroom
             selected_course =selected.course
-            print(f" This class allready have  {selected.course.name} this course") 
+            print(Fore.RED + emoji.emojize(f" This class allready have  {selected.course.name} this course.:cross_mark:")+ Style.RESET_ALL )
             print(sc1.print_courses())
             new_course_id = int(input("Enter new course ID: "))
             new_course = None
@@ -656,28 +658,28 @@ while True:
             current_teacher = selected.teacher
             selected.course = new_course 
             if current_teacher is not None and new_course in current_teacher.courses:
-                print(f"Classroom course changed to {new_course.name} (ID: {new_course.id}).")
+                print(Fore.GREEN + emoji.emojize(f"Classroom course changed to {new_course.name} (ID: {new_course.id}).:check_mark:")+ Style.RESET_ALL)
             else:
                 selected.teacher = None 
-                print("The current teacher does not teach this course. Teacher has been removed.")
+                print(Fore.RED + emoji.emojize("The current teacher does not teach this course. Teacher has been removed.:cross_mark:")+ Style.RESET_ALL)
 
             students_kept = []
             for student in selected.students:
                 if new_course in student.courses:
                     students_kept.append(student)
                 else:
-                    print(f"Student ID {student.id} removed (does not have this course).")
+                    print(Fore.RED + emoji.emojize(f"Student ID {student.id} removed (does not have this course).:cross_mark:")+ Style.RESET_ALL)
             selected.students = students_kept
 
         elif cmd==3:
             selected_course = sc1.selected_classroom.course
-            print(f" teacher {sc1.selected_classroom.teacher.id} allready have this class")
+            print(Fore.RED + emoji.emojize(f" teacher {sc1.selected_classroom.teacher.id} allready have this class.:cross_mark:")+ Style.RESET_ALL)
             matching_teachers = [t for t in sc1.teachers if selected_course in t.courses]
             if matching_teachers:
                 for t in matching_teachers:
                     print(f"ID: {t.id} | Name: {t.name} {t.family}")
             else:
-                print("No teachers found for this course.")
+                print(Fore.RED + emoji.emojize("No teachers found for this course.:cross_mark:")+ Style.RESET_ALL)
 
             for t in sc1.teachers:
                 if cls.course in t.courses:
@@ -688,7 +690,7 @@ while True:
                 original = sc1.teachers[sc1.teachers.index(teacher_obj)]
                 cls.change_teacher(original)
             else:
-                print("Teacher not found")
+                print(Fore.RED + emoji.emojize("Teacher not found.:cross_mark:")+ Style.RESET_ALL)
 
         elif cmd==4:
             for s in sc1.students:
@@ -702,13 +704,13 @@ while True:
                 original = sc1.students[sc1.students.index(student_obj)]
                 cls.add_student(original)
             else:
-                print("Student not found")
+                print(Fore.RED + emoji.emojize("Student not found")+ Style.RESET_ALL)
 
         elif cmd==5:
             cls=sc1.selected_classroom
             for s in cls.students:
                 print(s)
-            student_id = int(input("Enter student id to remove: "))
+            student_id = int(input("Enter student id to remove:"))
             cls.remove_student(student_id)
             
         elif cmd==0:
