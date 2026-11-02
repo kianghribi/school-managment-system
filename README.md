@@ -4,7 +4,7 @@ This project is a  simple school management system.It allows you add, edit, dele
 
 This project saves everything in JSON files. The `load_data()` method reads everything from `dataa.json` and recreates the objects, and `save_data()` writes the current state to `saves.json`. So you can work, save, and pick up where you left off later. We also put some rules in this program to keep the data consistent: for example, if a course or teacher is already used in a classroom, you can't delete it. Or a student can only be added to a classroom if they've scored less than 10 in that course — just like getting a failing grade and needing to retake it in a real school.
 
-In the end, this program is a good choice for anyone who wants to learning Python and object-oriented programming. It covers  operator overloading like `__eq__` and `__str__`, class composition, and working with JSON files.  this program helps you understand  where to correctly use conditional statements and loops,and allows you tp learn the inner workings of a real program.
+In the end, this program is a good choice for anyone who wants to learning Python and object-oriented programming. It covers  operator overloading like `__eq__` and `__str__`, class composition, and working with JSON files.  this program helps you understand  where to correctly use conditional statements and loops,and allows you tp learn the inner workings of a real program. The program also uses `colorama` for colored terminal output and `emoji` for a friendlier, more visual interface.
 
 ## Installation
 
@@ -13,10 +13,9 @@ Getting this project up and running is super easy. Just follow these steps:
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/school-management-system.git
+git clone https://github.com/kianghribi/school-management-system.git
 cd school-management-system
 ```
-
 **2. Make sure you have Python installed**
 
 This project works with Python 3.7 or higher. You can check your version with:
@@ -25,10 +24,15 @@ This project works with Python 3.7 or higher. You can check your version with:
 python --version
 ```
 
-**3. Run the program**
+**3. Install the required libraries**
 
-There's nothing to install — no extra libraries, no pip, nothing! Just run:
+This project uses two extra libraries: colorama (for colored output) and emoji (for emojis in the menu). Install them with:
 
+```bash
+pip install colorama emoji
+```
+**4. Run the program**
+Now run the program
 ```bash
 python main.py
 ```

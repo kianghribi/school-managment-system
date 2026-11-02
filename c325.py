@@ -398,10 +398,10 @@ while True:
             
     elif level=="students":
         print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :clipboard:")   + " show students"   + Style.RESET_ALL)
-        print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus:")        + " add students"    + Style.RESET_ALL)
-        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :keyboard:")     + " edit students"   + Style.RESET_ALL)
+        print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus: ")        + " add students"    + Style.RESET_ALL)
+        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :keyboard: ")     + " edit students"   + Style.RESET_ALL)
         print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket: ") + " delete students" + Style.RESET_ALL)
-        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :backhand_index_pointing_up_light_skin_tone:")   +  " select students" + Style.RESET_ALL)
+        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :backhand_index_pointing_up: ")   +  " select students" + Style.RESET_ALL)
         print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow:")      + " back"       + Style.RESET_ALL)
         cmd=int(input())
         if cmd==1:
@@ -437,8 +437,8 @@ while True:
         print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :information_source:") + " info"         + Style.RESET_ALL)
         print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus:")               + " add course"   + Style.RESET_ALL)
         print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :wastebasket:")        + " delet course" + Style.RESET_ALL)
-        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :100:")                + " set score"    + Style.RESET_ALL)
-        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :back:")               + " back"         + Style.RESET_ALL)
+        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :hundred_points:")                + " set score"    + Style.RESET_ALL)
+        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow: ")               + " back"         + Style.RESET_ALL)
         cmd=int(input())
         if cmd==1:
            sc1.selected_student.print_info()
@@ -468,10 +468,10 @@ while True:
     elif level=="teachers":
         print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :clipboard:")   + " show teachers"   + Style.RESET_ALL)
         print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus:")        + " add teachers"    + Style.RESET_ALL)
-        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :pencil2:")     + " edit teachers"   + Style.RESET_ALL)
-        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket:") + " delete teachers" + Style.RESET_ALL)
-        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :dart:")        + " select teachers" + Style.RESET_ALL)
-        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :back:")        + " back"            + Style.RESET_ALL)
+        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :keyboard: ")     + " edit teachers"   + Style.RESET_ALL)
+        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket: ") + " delete teachers" + Style.RESET_ALL)
+        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :backhand_index_pointing_up: ")        + " select teachers" + Style.RESET_ALL)
+        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow:")        + " back"            + Style.RESET_ALL)
         cmd=int(input())
         if cmd==1:
             sc1.print_teachers()
@@ -509,7 +509,7 @@ while True:
         print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :information_source:") + " info"         + Style.RESET_ALL)
         print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus:")               + " add course"   + Style.RESET_ALL)
         print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :wastebasket:")        + " delet course" + Style.RESET_ALL)
-        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :back:")               + " back"         + Style.RESET_ALL)
+        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow:")               + " back"         + Style.RESET_ALL)
         cmd=int(input())
         if cmd==1:
             sc1.selected_teacher.print_info()
@@ -536,9 +536,9 @@ while True:
     elif level=="courses":
         print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :clipboard:")   + " show courses"   + Style.RESET_ALL)
         print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus:")        + " add courses"    + Style.RESET_ALL)
-        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :pencil2:")     + " edit courses"   + Style.RESET_ALL)
-        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket:") + " delete courses" + Style.RESET_ALL)
-        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :back:")        + " back"           + Style.RESET_ALL)
+        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :keyboard: ")     + " edit courses"   + Style.RESET_ALL)
+        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket: ") + " delete courses" + Style.RESET_ALL)
+        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow:")        + " back"           + Style.RESET_ALL)
         cmd=int(input())
         if cmd==1:
             sc1.print_courses()
@@ -560,12 +560,12 @@ while True:
             level="root"
 
     elif level=="classrooms":
-        print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :clipboard:")   + " show classrooms"   + Style.RESET_ALL)
-        print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus:")        + " add classrooms"    + Style.RESET_ALL)
-        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :pencil2:")     + " edit classrooms"   + Style.RESET_ALL)
-        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket:") + " delete classrooms" + Style.RESET_ALL)
-        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :dart:")        + " select classrooms" + Style.RESET_ALL)
-        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :back:")        + " back"             + Style.RESET_ALL)
+        print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :clipboard: ")   + " show classrooms"   + Style.RESET_ALL)
+        print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :plus: ")        + " add classrooms"    + Style.RESET_ALL)
+        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :keyboard: ")     + " edit classrooms"   + Style.RESET_ALL)
+        print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :wastebasket: ") + " delete classrooms" + Style.RESET_ALL)
+        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :backhand_index_pointing_up: ")        + " select classrooms" + Style.RESET_ALL)
+        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow:")        + " back"             + Style.RESET_ALL)
         cmd=int(input())
         if cmd==1:
             print("classrooms:")
@@ -634,11 +634,11 @@ while True:
             level="root"
     elif level=="select classroom":
         print(Fore.YELLOW + "1." + Fore.WHITE + emoji.emojize(" :information_source:")      + " info"           + Style.RESET_ALL)
-        print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :arrows_counterclockwise:") + " change course"  + Style.RESET_ALL)
-        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :repeat:")                  + " change teacher" + Style.RESET_ALL)
+        print(Fore.YELLOW + "2." + Fore.WHITE + emoji.emojize(" :repeat_button:") + " change course"  + Style.RESET_ALL)
+        print(Fore.YELLOW + "3." + Fore.WHITE + emoji.emojize(" :repeat_button:")                  + " change teacher" + Style.RESET_ALL)
         print(Fore.YELLOW + "4." + Fore.WHITE + emoji.emojize(" :plus:")                    + " add student"    + Style.RESET_ALL)
-        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :heavy_minus_sign:")        + " remove student" + Style.RESET_ALL)
-        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :back:")                    + " back"           + Style.RESET_ALL)
+        print(Fore.YELLOW + "5." + Fore.WHITE + emoji.emojize(" :minus:")        + " remove student" + Style.RESET_ALL)
+        print(Fore.RED    + "0." + Fore.WHITE + emoji.emojize(" :BACK_arrow:")                    + " back"           + Style.RESET_ALL)
         cmd=int(input())
 
         cls = sc1.selected_classroom
