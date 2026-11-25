@@ -109,7 +109,15 @@ $ python main.py
 (no output — data is written silently to saves.json)
 ```
 
+
+```
 ## Structure
+
+> **Project layout:** The classes `Course`, `Student`, `Teacher`, `Classroom`, and `School` are defined in `model.py`. The main program imports them with:
+
+```python
+import model
+from model import Course, Student, Teacher, School, Classroom
 
 ### Course
 
